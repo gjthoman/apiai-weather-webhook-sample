@@ -36,15 +36,15 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "yahooWeatherForecast":
+    if req.get("result").get("action") != "how_much_house":
         return {}
-    baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery(req)
-    if yql_query is None:
-        return {}
-    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    result = urlopen(yql_url).read()
-    data = json.loads(result)
+    # baseurl = "https://query.yahooapis.com/v1/public/yql?"
+    # yql_query = makeYqlQuery(req)
+    # if yql_query is None:
+    #     return {}
+    # yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    # result = urlopen(yql_url).read()
+    # data = json.loads(result)
     res = makeWebhookResult(data)
     return res
 
@@ -84,8 +84,10 @@ def makeWebhookResult(data):
 
     # print(json.dumps(item, indent=4))
 
-    speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
-             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+    # speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
+             # ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+
+    speech = "API is working"
 
     print("Response:")
     print(speech)
@@ -95,7 +97,7 @@ def makeWebhookResult(data):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
+        "source": "tdrs-bot"
     }
 
 
