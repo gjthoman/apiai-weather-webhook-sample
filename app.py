@@ -28,6 +28,8 @@ def webhook():
 
     res = processRequest(req)
 
+    print(json.dumps(res, indent=4))
+    
     res = json.dumps(res, indent=4)
     # print(res)
     r = make_response(res)
@@ -38,7 +40,7 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "how_much_house":
         return {}
-        
+
     res = makeWebhookResult(data)
     return res
 
